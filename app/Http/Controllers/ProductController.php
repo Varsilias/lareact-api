@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Model\Product;
+use  App\Http\Requests\ProductRequest;
 use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api')->except('index', 'show');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +39,20 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+    
+        // create product
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
+        $product->discount = $request->input('discount');
+        $product->description = $request->input('description');
+        $product->save();
+        return response([
+            'data' => new ProductResource($product)
+        ], 201);
     }
 
     /**
@@ -70,7 +86,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return response([
+            'data' => new ProductResource($product)
+        ], 201);
     }
 
     /**
