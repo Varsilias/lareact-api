@@ -52,11 +52,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        //Model not found exception
+        // Model not found exception
         if($request->expectsJson()){
             if($exception instanceof ModelNotFoundException){
                 return response()->json([
-                    'errors' => "Product Model Not found"
+                    'message' => "Product Model Not found"
                 ], 404);
             }
         }
@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
         // Http not found exception
         if($exception instanceof NotFoundHttpException){
             return response()->json([
-                'errors' => "Incorrect URL"
+                'error' => "Incorrect URL"
             ], 404);
         }
         return parent::render($request, $exception);

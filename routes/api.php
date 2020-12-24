@@ -18,10 +18,24 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::group([
+
+    // 'middleware' => 'api',
+    'prefix' => 'v1/auth'
+
+], function () {
+
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});
+
 // Product API route
-Route::apiResource('products', 'ProductController');
+Route::apiResource('v1/products', 'ProductController');
 
 // Review API route
-Route::group(['prefix' => 'products'], function () {
+Route::group(['prefix' => 'v1/products'], function () {
     Route::apiResource('/{product}/reviews', 'ReviewController');
 });

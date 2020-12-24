@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api')->except('index', 'show');
-    // }
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +42,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-    
+
         // create product
         $product = new Product;
         $product->name = $request->input('name');
@@ -101,6 +102,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return response(null, 204);
+        return response([
+            'message' => 'Product deleted successfully'
+        ], 204);
     }
 }
