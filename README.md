@@ -7,7 +7,7 @@ Lareact-Api is an open source ecommerce API built with the most popular PHP fram
 
 ## Built with Laravel.
 
-Feel free to fork the repository and modify it according to your choice.
+Feel free to fork the repository and modify it according to your choice do not forget to star the **repo**.
 
 ## Found it useful
  If you find this repo helpful feel free to let me know on all or any of my social media handle
